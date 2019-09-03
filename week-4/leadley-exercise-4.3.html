@@ -1,0 +1,48 @@
+<!--------------------------------------------------------
+; Title:  leadley-exercise-4.2.js
+; Author: Richard Krasso
+; Modified by: Kurt Leadley
+; Date:   02 September 2019
+; Description: DELETE with AJAX example
+---------------------------------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 4.3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+  <h2>HTTP DELETE Request Example</h2>
+  <button id="deleteObject">Delete Object</button>
+<script>
+    $(function() {
+      // this will be the object to delete.
+      var myObject = {
+        "name" : "Sharks",
+        "captain" : "Logan Couture",
+        "coach" : "Peter DeBoer",
+        "city" : "San Jose",
+        // don't know how to access these alternates
+        "alternates" : {"name":"Brent Burns", "name":"Marc Eduard Vlasic"}
+      }
+      // require and display my header
+      // click function for our delete button, this will set things off
+      $('#deleteObject').click(function(){
+        // object literal object for the DELETE http request
+        $.ajax({
+          url: "http://httpbin.org/delete",
+          dataType:'json',
+          type:"DELETE",
+          data: myObject,
+          // callback success function with our data and status passed in
+          success: function(data,status) {
+            //log it
+           console.log(' Team: ' + data.form.city+' '+data.form.name+ '\n Captain: '+ data.form.captain+'\n Coach: '+  data.form.coach + '\n Status: ' + status );
+          }
+        });
+      });
+    });
+</script>
+</body>
+</html>

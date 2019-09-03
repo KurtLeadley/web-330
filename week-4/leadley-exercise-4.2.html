@@ -7,34 +7,34 @@
 ---------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Exercise 4.2</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
-  <h2>HTTP GET Request Example</h2>
-  <button id="getDog">Get Random Dog</button>
-  <figure id="imgContainer"></figure>
-<script>
-    $(function() {
-      // require and display my header
-      // click function for the Get Random Dog button
-      $('#getDog').click(function(){
-        // clear my figure tag on each click for new image
-        $('#imgContainer').html('');
-        // ajax.get() this random dog image api. the function handles what we get from the request
-        $.get('https://dog.ceo/api/breeds/image/random', function(data,status){
-          console.log('Data: ' + JSON.stringify(data));
-          console.log('Status: ' + status);
-          // upon looking at the JSON data, data.message is the url for the image
-          console.log(data.message);
-          // append a p tag and and img tag. Add the image url to the img tag
-          $('#imgContainer').append("<p>Here is your Dog:</p>");
-          $('#imgContainer').append("<img src='"+data.message+"' height='180px'</img>");
+  <head>
+      <meta charset="UTF-8">
+      <title>Exercise 4.2</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h2>HTTP GET Request Example</h2>
+    <button id="getDog">Get Random Dog</button>
+    <figure id="imgContainer"></figure>
+  <script>
+      $(function() {
+        // require and display my header
+        // click function for the Get Random Dog button
+        $('#getDog').click(function(){
+          // clear my figure tag on each click for new image
+          $('#imgContainer').html('');
+          // ajax.get() this random dog image api. the function handles what we get from the request
+          $.get('https://dog.ceo/api/breeds/image/random', function(data,status){
+            console.log('Data: ' + JSON.stringify(data));
+            console.log('Status: ' + status);
+            // upon looking at the JSON data, data.message is the url for the image
+            console.log(data.message);
+            // append a p tag and and img tag. Add the image url to the img tag
+            $('#imgContainer').append("<p>Here is your Dog:</p>");
+            $('#imgContainer').append("<img src='"+data.message+"' height='180px'</img>");
+          });
         });
       });
-    });
-</script>
-</body>
+  </script>
+  </body>
 </html>

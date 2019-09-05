@@ -1,0 +1,39 @@
+body {
+  padding:0;
+  margin:0;
+  background-color: #17223b;
+  color: #ff6768;
+}
+main {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+  "h2 h2"
+  "btn span";
+  margin:0 10%;
+  grid-column-gap:15px;
+  grid-row-gap: 15px;
+}
+h2,button,span {
+  justify-self: center;
+  background-color: #263859;
+  width:100%;
+  text-align: center;
+}
+h2 {
+  grid-area: h2;
+  padding:10px 0;
+}
+button {
+  grid-area:btn;
+  color:white;
+  font-size:16pt;
+  padding:10px;
+}
+button:hover {
+  color:#ff6768;
+  border-color: #ff6768;
+}
+span {
+  grid-area:span;
+}

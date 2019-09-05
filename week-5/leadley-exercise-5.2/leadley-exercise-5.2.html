@@ -1,0 +1,51 @@
+<!--------------------------------------------------------
+; Title:  leadley-exercise-5.2.js
+; Author: Richard Krasso
+; Modified by: Kurt Leadley
+; Date:   04 September 2019
+; Description: jQuery Proxy Pattern
+---------------------------------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Exercise 5.2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+  </head>
+  <body>
+    <main>
+      <h2>jQuery Proxy Example</h2>
+      <button id="btn">Append Hidden Object</button>
+      <span id="results-span"></span>
+    </main>
+    <script>
+        $(function() {
+          // object literal deathStar object
+          var deathStar = {
+            "name" : "deathstar",
+            "color" :"grey",
+            "shape" : "spherical",
+            "function" : "being blown up",
+            "weakness" : "blueprint leaks",
+            "weapon" : "a giant laser",
+            // this display function gets called on the #btn click
+            "display" : function() {
+              // using template literal syntax for easy readability
+              var html =
+              `<p>Name: ${this.name}</p>
+              <p>Weapon of choice: ${this.weapon}</p>
+              <p>Function: ${this.function}</p>
+              <p>Weakness: ${this.weakness}</p>`;
+              // clear this elements html
+              $('#results-span').html('');
+              // append our html var to the span element
+              $('#results-span').append(html);
+            }
+          }
+          // when the button is clicked, use the proxy method to get our deathStar object and fire off the display function
+          $('#btn').click($.proxy(deathStar,"display"));
+        });
+    </script>
+  </body>
+</html>

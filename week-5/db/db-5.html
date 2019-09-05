@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Exercise 5.2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <h2>Namespace Example</h2>
+      <button id="btn">Play Namespaced Album</button>
+      <button id="btn2">Play Non-Namespaced Album</button>
+      <span id="results-span"></span>
+    </main>
+    <script>
+      // declare our namespace outside in the global scope
+      ;var BANDNAMESPACE = {};
+      // self encapsulated jQuery namespace function
+      // everything in this function can only be referenced by the BANDNAMESPACE namespace
+      ;(function($) {
+        // this is adding a subnamespace called PINKFLOYD
+        // I place an Album in the PINKFLOYD namespace in Object literal notation
+        BANDNAMESPACE.PINKFLOYD = {
+          "WishYouWereHere" : {
+            "songOne" : {
+              "name" : "Shine on you Diamond (Parts I-V)",
+              "length" : "13:32"
+            },
+            "songTwo" : {
+              "name" : "Welcome to the Machine",
+              "length" : "7:32"
+            },
+            "songThree" : {
+              "name" : "Have a Cigar",
+              "length" : "5:08"
+            },
+            "songFour" : {
+              "name" : "Wish You Were Here",
+              "length" : "5:35"
+            },
+            "songFive" : {
+              "name" : "Shine on you Diamond (Parts VI-IX)",
+              "length" : "12:30"
+            }
+          },
+          // when calling the playAlbum function, add each song and song length to our #results-span
+          "playAlbum" : function() {
+            $('#results-span').append('<h3>Playing Album: Wish You Were Here</h3>');
+            // find each top level key inside "WishYouWereHere"
+            for (var key in BANDNAMESPACE.PINKFLOYD.WishYouWereHere) {
+              // song is now "songOne{}","songTwo{}" etc
+              var song = BANDNAMESPACE.PINKFLOYD.WishYouWereHere[key];
+              // using the key now named song, get a song name and length per loop and append it to our span
+              $('#results-span').append("<p>"+ song.name+", "+song.length+"</p>");
+            }
+          }
+        }
+      })(jQuery);
+
+      // This is outside of the jQuery namespace in the global scope now
+      // create another playAlbum function in the global scope
+      function playAlbum() {
+        $('#results-span').html("<p>Playing Brittany Spears, you should have used a Namespace</p>");
+      }
+
+      // this is our document.ready() jQuery function where we manipulate the DOM
+      $(function(){
+        // display namespaced album when clicking
+        $('#btn').click(function(){
+          $('#results-span').html('');
+          BANDNAMESPACE.PINKFLOYD.playAlbum();
+        });
+        // display global playAlbum when clicking
+        $('#btn2').click(function(){
+          $('#results-span').html('');
+          playAlbum();
+        });
+      });
+    </script>
+  </body>
+</html>

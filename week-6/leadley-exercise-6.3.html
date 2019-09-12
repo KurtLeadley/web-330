@@ -1,16 +1,16 @@
 <!--------------------------------------------------------
-; Title:  leadley-exercise-6.2.js
+; Title:  leadley-exercise-6.3.js
 ; Author: Richard Krasso
 ; Modified by: Kurt Leadley
 ; Date:   12 September 2019
-; Description: Knockout.js introduction
+; Description: Knockout.js introduction | Object Literal
 ---------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>KL | Exercise 6.2</title>
+    <title>KL | Exercise 6.3</title>
     <!-- Stylesheet - Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -28,7 +28,7 @@
       </ul>
     </nav>
     <div role="main" class="container">
-      <h2>Knockout ViewModel Example</h2>
+      <h2>Knockout ViewModel Example Object Literal</h2>
       <div class="form-group">
         <label for="txtFirst">First Name:</label>
         <!-- data-bind the object properties in the input fields-->
@@ -44,15 +44,15 @@
       </div>
     </div>
     <script>
-      // create our view model object
-      function PersonViewModel() {
-        // this -> property = property
-        this.firstName = ko.observable("Kurt");
-        this.lastName = ko.observable("Leadley");
-        this.emailAddress = ko.observable('kleadley@my365.bellevue.edu');
+      // create our view model as an object literal
+      var personViewModel = {
+        // property : value
+        firstName : "Kurt",
+        lastName : "Leadley",
+        emailAddress : 'kleadley@my365.bellevue.edu'
       }
       // when inputting into the data bound fields, make a new person object
-      ko.applyBindings(new PersonViewModel());
+      ko.applyBindings(personViewModel);
     </script>
   </body>
 </html>

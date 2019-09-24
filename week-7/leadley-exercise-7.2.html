@@ -1,0 +1,64 @@
+<!--------------------------------------------------------
+; Title:  leadley-exercise-7.2.js
+; Author: Richard Krasso
+; Modified by: Kurt Leadley
+; Date: 23 September 2019
+; Description: Knockout.js bindings
+; Directions: Recreate Example 2 using a PersonViewModel with two fields and a fullName() computed function
+; The output and functionality should mirror Example 2
+; (i.e., entering the person’s firstName should display an input field for the person’s last name.
+; Entering the person’s lastName should display a concatenated fullName value)
+---------------------------------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Exercise 7.2</title>
+      <!-- Stylesheet - Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+            integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+      <!-- bootstrap overrides -->
+      <link rel="stylesheet" href="styles/style.css" />
+      <!-- JavaScript Libraries -->
+      <script src="../knockout-3.5.0.js"></script>
+  </head>
+  <body>
+    <div role="main" class="container">
+      <h2>Leadley - Exercise 7.2 If Binding</h2>
+      <!--First Name Section, always shows-->
+      <div class="form-group">
+        <label for="txtFirstName">First Name: </label>
+        <input type="text" id="txtFirstName" class="form-control" data-bind="value: first"/>
+      </div>
+      <!--Check for a first name with displayLast, if there is, show this-->
+      <div data-bind="if: displayLast">
+        <div class="form-group">
+          <label for="txtLastName">Last Name: </label>
+          <input type="text" id="txtLastName" class="form-control" data-bind="value: last"/>
+        </div>
+      </div>
+      <!--Check for a last name, if there is, show this-->
+      <div data-bind="if: last">
+        <h2><span id="nameOutput" class="alert-success" data-bind="text:displayFullName"></span></h2>
+      </div>
+    </div>
+    <script>
+      function PersonViewModel() {
+        // observe data-bind first and last
+        this.first = ko.observable("");
+        this.last = ko.observable("");
+        // check the state first name's existence by returning it
+        this.displayLast = ko.pureComputed(function () {
+          return this.first();
+        }, this);
+        // return a concatenated first and last name string
+        this.displayFullName = ko.pureComputed(function () {
+          return this.first() + " " + this.last();
+        }, this);
+      }
+      // apply the data binds first and last to the PersonViewModel
+      ko.applyBindings(new PersonViewModel());
+    </script>
+  </body>
+</html>

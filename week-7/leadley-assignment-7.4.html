@@ -1,0 +1,66 @@
+<!--------------------------------------------------------
+; Title:  leadley-assignment-7.4.js
+; Author: Richard Krasso
+; Modified by: Kurt Leadley
+; Date: 23 September 2019
+; Description: Knockout.js bindings
+; Directions: Create an array of five (5) JavaScript tutorial objects
+; Each object must include a website URL, title, and description
+; Using the “foreach” binding, iterate over the list of JavaScript tutorial objects and output the results in a styled Boostrap 4 table
+; (see the previous examples for code snippets)
+; Table th values:
+; Title
+; Description
+; Link
+; The link must open in a new window and include CSS styling – hint: use the attr and style bindings
+---------------------------------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Assignment 7.4</title>
+      <!-- Stylesheet - Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+            integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+      <!-- bootstrap overrides -->
+      <link rel="stylesheet" href="styles/style.css" />
+      <!-- JavaScript Libraries -->
+      <script src="../knockout-3.5.0.js"></script>
+  </head>
+  <body>
+    <div role="main" class="container">
+      <h2>JavaScript Tutorials</h2>
+      <table class="table table-dark table-striped table-hover">
+        <thead>
+          <tr><th>Title</th><th>Description</th><th>Link</th></tr>
+        </thead>
+        <!--foreach jsTutorial, bind the data to a table row-->
+        <tbody data-bind="foreach: jsTutorials">
+          <tr>
+            <td data-bind="text: title"></td>
+            <td data-bind="text: description"></td>
+            <!--multiple data-binds get separated with a comma. Set the attribute and style-->
+            <td><a data-bind="attr: {href:url}, style:{color:'#F0AE00'}" target="_blank">Click Here</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <script>
+    // function that creates our view model array
+    function JSTutorialViewModel() {
+      // jsTutorials is our observable array
+      this.jsTutorials = ko.observableArray([
+        // three properties: url, title and description
+        {url: "https://www.w3schools.com/js/js_dates.asp", title: "JavaScript Date Objects", description: "Learn how to work with JS Date Objects."},
+        {url: "https://www.w3schools.com/js/js_switch.asp", title: "JavaScript Switch Statement", description: "Learn how to perform different actions based on different conditions."},
+        {url: "https://www.w3schools.com/js/js_json.asp", title: "JavaScript JSON", description: "JSON is a format for storing and transporting data."},
+        {url: "https://www.w3schools.com/js/js_hoisting.asp", title: "JavaScript Hoisting", description: "Hoisting is JavaScript's default behavior of moving declarations to the top."},
+        {url: "https://www.w3schools.com/js/js_object_accessors.asp", title: "JavaScript Object Accessors", description: "Getters and setters allow you to define Object Accessors (Computed Properties)."}
+      ]);
+    }
+    // apply data bindings to our tutorial view model
+    ko.applyBindings(new JSTutorialViewModel());
+  </script>
+  </body>
+</html>

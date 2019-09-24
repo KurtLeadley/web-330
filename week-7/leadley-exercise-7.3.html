@@ -1,0 +1,52 @@
+<!--------------------------------------------------------
+; Title:  leadley-exercise-7.3.js
+; Author: Richard Krasso
+; Modified by: Kurt Leadley
+; Date: 23 September 2019
+; Description: Knockout.js bindings
+; Directions: Recreate the “foreach” binding example using a list of textbook objects
+; The textbook objects should have a title and price
+; Output the results using a Boostrap 4 table – hint: use the “foreach” binding example as your guide
+---------------------------------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Exercise 7.3</title>
+      <!-- Stylesheet - Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+            integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+      <!-- bootstrap overrides -->
+      <link rel="stylesheet" href="styles/style.css" />
+      <!-- JavaScript Libraries -->
+      <script src="../knockout-3.5.0.js"></script>
+  </head>
+  <body>
+    <div role="main" class="container">
+      <h2>The "foreach" binding</h2>
+      <table class="table table-dark table-striped table-hover">
+        <thead>
+          <tr><th>Title</th><th>Price</th></tr>
+        </thead>
+        <tbody data-bind="foreach: textBooks">
+          <tr>
+            <td data-bind="text: title"></td>
+            <td data-bind="text: price"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <script>
+    function TextBookViewModel() {
+      this.textBooks = ko.observableArray([
+        {title: "Express In Action", price: 55.09},
+        {title: "Learning JavaScript Design Patterns", price: 36.89},
+        {title: "PEAR, not the fruit", price: 24.75},
+        {title: "Mongo DB", price: 42.00}
+      ]);
+    }
+    ko.applyBindings(new TextBookViewModel());
+  </script>
+  </body>
+</html>

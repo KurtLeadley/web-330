@@ -1,0 +1,88 @@
+<!--------------------------------------------------------
+; Title:  leadley-exercise-8.2.js
+; Author: Richard Krasso
+; Modified by: Kurt Leadley
+; Date: 29 September 2019
+; Description: Exercise 8.2.js
+---------------------------------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Exercise 8.2</title>
+      <!-- Stylesheet - Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+            integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+      <!-- bootstrap overrides -->
+      <link rel="stylesheet" href="styles/style.css" />
+      <!-- JavaScript Libraries -->
+      <script src="../knockout-3.5.0.js"></script>
+  </head>
+  <body>
+    <div role="main" class="container">
+      <h2>CR Example</h2>
+      <br/>
+      <div class="row" data-bind="if: error">
+        <div class="col-sm-12">
+          <div class="alert alert-danger" role="alert">
+            <strong>Warning!</strong> <span data-bind="text: error()"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card card-inverse" style="background-color: #333; border-color: #333; color: white;">
+            <div class="card-block p-3">
+              <h3 class="card-title">Employee List</h3>
+              <div class="card-text">
+                <div class="form-group row">
+                  <label for="txtEmployee" class="col-2 col-form-label">Name: </label>
+                <div class="col-6">
+                  <!-- save this value when afterkeydown-->
+                  <input type="text" data-bind="value: nameToAdd, valueUpdate:'afterkeydown'" class="form-control" id="txtEmployee"/>
+                </div>
+                <div class="col-4">
+                  <!--Click on this and you access the add function of the employee view model-->
+                  <a href="#" data-bind="click: add" class="btn btnprimary">Add Employee</a>
+                </div>
+                </div>
+                <div class="form-group">
+                  <label for="txtEmployeeList">Employee List: </label>
+                  <!-- add select options to our select list from employeeList -->
+                  <select size="10" class="form-control" data-bind="options: employeeList" id="txtEmployeeList"></select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function EmployeeViewModel() {
+        // define this ViewModel
+        this.nameToAdd = ko.observable("");
+        // start with these employees in an observable array
+        this.employeeList = ko.observableArray(["Eddard", "Gregor"]);
+        // create an observable for error
+        this.error = ko.observable("");
+        // when trying to add, do this
+        this.add = function () {
+          if ((this.nameToAdd() !== "") && (this.employeeList.indexOf(this.nameToAdd()) < 0)) {
+            // there is no error in this if case
+            this.error("");
+            // push the employee to the employee list
+            this.employeeList.push(this.nameToAdd());
+          }
+          // if test failed
+          else {
+            this.error("Duplicate or Invalid Entry.");
+          }
+            this.nameToAdd("");
+        }
+      }
+      // apply bindings, aka instantiate it
+      ko.applyBindings(new EmployeeViewModel());
+    </script>
+  </body>
+</html>

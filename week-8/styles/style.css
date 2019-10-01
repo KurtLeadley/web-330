@@ -1,0 +1,18 @@
+body {
+  margin:0;
+  padding:0;
+  background-color:#0c2233;
+  color: #fff;
+}
+h2 {
+  margin:10px 0;
+}
+th {
+  font-weight: bold;
+}
+td,th {
+  border: 1px solid #add8e6 !important;
+}
+td {
+  color: #add8e6;
+}

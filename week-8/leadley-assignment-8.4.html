@@ -157,9 +157,13 @@
         };
         // when choosing update, make a new employee, delete the old one and add the new one
         self.update = function() {
+          console.log(self.Employees);
+          console.log(self.Name)
           var l_employee = self.Employee();
           self.Employees.remove(self.Employee());
           self.Employees.push(l_employee);
+          console.log(self.Employees);
+          console.log(Employee);
         }
         self.add = function() {
           console.log(employeeList);

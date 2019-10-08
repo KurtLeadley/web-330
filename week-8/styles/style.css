@@ -23,3 +23,7 @@ td {
 .row {
   margin:30px 0px;
 }
+.question-container.false {
+  display:none;
+  background-color: aqua;
+}
